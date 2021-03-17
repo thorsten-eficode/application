@@ -1,0 +1,40 @@
+name: Builder
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    steps:
+    - name: Buildah Build
+      # You may pin to the exact commit or the version.
+      # uses: redhat-actions/buildah-build@ef84eec383080016580e249ca80f81c13d19290d
+      uses: redhat-actions/buildah-build@v2.2.1
+      with:
+        # The name (reference) of the image to build
+        image: 
+        # The tags of the image to build. For multiple tags, seperate by a space. For example, "latest v1".
+        tags: # optional, default is latest
+        # The base image to use to create a new container image
+        base-image: # optional
+        # List of Dockerfile paths (eg: ./Dockerfile)
+        dockerfiles: # optional
+        # Path of the directory to use as context (default: .)
+        context: # optional, default is .
+        # List of files/directories to copy inside the base image
+        content: # optional
+        # The entry point to set for containers based on image
+        entrypoint: # optional
+        # The port to expose when running containers based on image
+        port: # optional
+        # The working directory to use within the container
+        workdir: # optional
+        # List of environment variables to be set when running containers based on image
+        envs: # optional
+        # List of --build-args to pass to buildah
+        build-args: # optional
+        # Set to true to build using the OCI image format instead of the Docker image format
+        oci: # optional, default is false
+        # Architecture(s) to build the image(s) for. For multiple architectures, separate by a comma.
+        archs: # optional, default is amd64
