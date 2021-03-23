@@ -1,3 +1,5 @@
+# pylint: disable=F0001
+
 """
 documentation
 """
@@ -7,12 +9,12 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-
 @app.get("/")
 def read_root():
+    """ docstring """
     return {"Hello": "World"}
 
-
 @app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+def read_item(item_id: int, query: Optional[str] = None):
+    """ docstring """
+    return {"item_id": item_id, "q": query}
