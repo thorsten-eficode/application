@@ -1,10 +1,10 @@
 # Application
 
 Test ...
+
 - Code security features
-- Github Actions
+- GitHub Actions
 
 ## References
 
-- [Flask](https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application}
-
+- [FastAPI](reference: https://fastapi.tiangolo.com/#create-it)
