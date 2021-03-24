@@ -2,11 +2,11 @@
     docstring
 """
 
-import signal, sys
+import sys
 import socketserver
 from api.handler import ServiceHandler
 
-class Server:
+class Server: # pylint: disable=too-few-public-methods
     """
         docstring
     """
@@ -14,11 +14,12 @@ class Server:
     def __init__(self, port: int = 8080):
         self.server = socketserver.ThreadingTCPServer(('',port), ServiceHandler )
         # ensures that Ctrl-C cleanly kills all spawned threads
-        self.server.daemon_threads = True  
+        self.server.daemon_threads = True
         # quick rebinding
         self.server.allow_reuse_address = True
 
     def run(self):
+        """ docstring """
         self.server.serve_forever()
         try:
             while True:
@@ -27,4 +28,3 @@ class Server:
         except KeyboardInterrupt:
             pass
         self.server.server_close()
-

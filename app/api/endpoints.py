@@ -27,7 +27,7 @@ class Endpoint:
         return self.uri == other.uri
 
 
-class Borg:
+class Borg: # pylint: disable=too-few-public-methods
     """
         docstring
     """
@@ -63,14 +63,13 @@ class Endpoints(Borg):
                 ]
 
     def __contains__(self, uri: str):
-        return self.__getitem__(uri) != None
+        return self.__getitem__(uri) is not None
 
     def __getitem__(self, uri :str):
-        for ep in self._eps:
-            if (ep.uri == uri):
-                return ep
+        for endpoint in self._eps:
+            if endpoint.uri == uri:
+                return endpoint
         return None
 
     def __add__(self, endpoint: Endpoint):
         self._eps.append(endpoint)
-

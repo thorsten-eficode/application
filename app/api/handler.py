@@ -6,11 +6,7 @@
 import json
 
 from http.server import BaseHTTPRequestHandler
-from api.endpoints import Endpoint, Endpoints
-
-NOT_FOUND = {
-    "error": "ressource not found"
-}
+from api.endpoints import Endpoints
 
 class ServiceHandler(BaseHTTPRequestHandler):
     """
@@ -21,7 +17,10 @@ class ServiceHandler(BaseHTTPRequestHandler):
         self._eps = Endpoints()
         super().__init__(*args, **kwargs)
 
-    def _create_response(self, status :int = 404, data :object = NOT_FOUND):
+    def _create_response(
+            self,
+            status :int = 404,
+            data :object = { "error": "ressource not found" }):
         """
             docstring
         """
@@ -35,7 +34,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
             docstring
         """
         endpoint = self._eps[self.path]
-        if (endpoint is not None):
+        if endpoint is not None:
             self._create_response(endpoint.status, endpoint.data)
         else:
             self._create_response(404)
@@ -63,4 +62,3 @@ class ServiceHandler(BaseHTTPRequestHandler):
             docstring
         """
         self._create_response(501)
-
