@@ -12,10 +12,10 @@ jobs:
       with:
         image: apilication
         tags: 0.1
-        base-image: docker.io/python:3.9-alpine3.13
+        base-image: docker.io/python:3.8-alpine3.13
         dockerfiles: ./Dockerfile
         context: .
-        port: 8000
+        port: 8080
         # Set to true to build using the OCI image format instead of the Docker image format
         oci: false
         # Architecture(s) to build the image(s) for. For multiple architectures, separate by a comma.
