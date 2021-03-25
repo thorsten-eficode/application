@@ -1,0 +1,22 @@
+name: Builder
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    steps:
+    - name: Buildah build the Dockerfile
+      uses: redhat-actions/buildah-build@v2.2.1
+      with:
+        image: apilication
+        tags: 0.1
+        base-image: docker.io/python:3.8-alpine3.13
+        dockerfiles: ./Dockerfile
+        context: .
+        port: 8080
+        # Set to true to build using the OCI image format instead of the Docker image format
+        oci: false
+        # Architecture(s) to build the image(s) for. For multiple architectures, separate by a comma.
+        archs: amd64
