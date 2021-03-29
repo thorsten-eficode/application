@@ -17,10 +17,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
         self._eps = Endpoints()
         super().__init__(*args, **kwargs)
 
-    def _create_response(
-            self,
-            status :int = 404,
-            data :object = { "error": "ressource not found" }):
+    def _create_response(self, status :int, data :object):
         """
             docstring
         """
@@ -37,28 +34,28 @@ class ServiceHandler(BaseHTTPRequestHandler):
         if endpoint is not None:
             self._create_response(endpoint.status, endpoint.data)
         else:
-            self._create_response(404)
+            self._create_response(404, { "error": "ressource not found"})
 
     def do_VIEW(self):
         """
             docstring
         """
-        self._create_response(501)
+        self._create_response(501, { "error": "not implemented"})
 
     def do_POST(self):
         """
             docstring
         """
-        self._create_response(501)
+        self._create_response(501, { "error": "not implemented"})
 
     def do_PUT(self):
         """
             docstring
         """
-        self._create_response(501)
+        self._create_response(501, { "error": "not implemented"})
 
     def do_DELETE(self):
         """
             docstring
         """
-        self._create_response(501)
+        self._create_response(501, { "error": "not implemented"})
