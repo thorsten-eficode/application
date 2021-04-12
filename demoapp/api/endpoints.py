@@ -6,25 +6,24 @@
 class Endpoint:
     """
         manages an api endpoint
-        uri: str
-        status: int
-        data: str
+        _uri: str
+        _status: int
+        _data: str
     """
 
     def __init__(self, uri: str = '/', status: int = 200, data: str = ''):
-        self.uri: str = uri
-        self.status: int = status
-        self.data: str = data
-        #print(self.__str__())
+        self._uri: str = uri
+        self._status: int = status
+        self._data: str = data
 
     def __str__(self):
-        return "[{}] {}".format(self.status, self.uri)
+        return "[{}] {}".format(self._status, self._uri)
 
     def __compare__(self, uri: str):
-        return self.uri == uri
+        return self._uri == uri
 
     def __eq__(self, other):
-        return self.uri == other.uri
+        return self._uri == other.uri
 
 
 class Borg: # pylint: disable=too-few-public-methods

@@ -13,7 +13,7 @@ jobs:
         image: apilication
         tags: 0.1
         base-image: docker.io/python:3.8-alpine3.13
-        dockerfiles: ./Dockerfile
+        dockerfiles: ./demoapp/Dockerfile
         context: .
         port: 8080
         # Set to true to build using the OCI image format instead of the Docker image format
