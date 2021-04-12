@@ -4,9 +4,9 @@
 """
 
 import json
-
 from http.server import BaseHTTPRequestHandler
 from api.endpoints import Endpoints
+
 
 class ServiceHandler(BaseHTTPRequestHandler):
     """
@@ -23,7 +23,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
         docstring
         """
         self.send_response(status)
-        self.send_header('Content-type', 'application/json')
+        self.send_header("Content-type", "application/json")
         self.end_headers()
         self.wfile.write(json.dumps(data).encode("utf-8"))
 

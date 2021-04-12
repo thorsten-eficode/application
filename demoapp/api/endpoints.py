@@ -50,7 +50,7 @@ class Endpoints(Borg):
             if not hasattr(self, "_eps"):
                 self._eps = [
                     Endpoint(uri="/health/liveness", status=200, data="ok"),
-                    Endpoint(uri="/health/readiness", status=200, data="ok")
+                    Endpoint(uri="/health/readiness", status=200, data="ok"),
                 ]
 
     def __contains__(self, uri: str):

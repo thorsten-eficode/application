@@ -6,13 +6,14 @@ import sys
 import socketserver
 from api.handler import ServiceHandler
 
+
 class Server:  # pylint: disable=too-few-public-methods
     """
     docstring
     """
 
     def __init__(self, port: int = 8080):
-        self._server = socketserver.ThreadingTCPServer(("",port), ServiceHandler )
+        self._server = socketserver.ThreadingTCPServer(("", port), ServiceHandler )
         # ensures that Ctrl-C cleanly kills all spawned threads
         self._server.daemon_threads = True
         # quick rebinding
