@@ -10,16 +10,17 @@ from api.endpoints import Endpoints
 
 class ServiceHandler(BaseHTTPRequestHandler):
     """
-        docstring
+    docstring
     """
+
     def __init__(self, *args, **kwargs):
         # super/init returns after request processing ends, so call it last
         self._eps = Endpoints()
         super().__init__(*args, **kwargs)
 
-    def _create_response(self, status :int, data :object):
+    def _create_response(self, status: int, data: object):
         """
-            docstring
+        docstring
         """
         self.send_response(status)
         self.send_header('Content-type', 'application/json')
@@ -28,34 +29,34 @@ class ServiceHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         """
-            docstring
+        docstring
         """
         endpoint = self._eps[self.path]
         if endpoint is not None:
-            self._create_response(endpoint.status, endpoint.data)
+            self._create_response(endpoint._status, endpoint._data)
         else:
-            self._create_response(404, { "error": "ressource not found"})
+            self._create_response(404, {"error": "ressource not found"})
 
     def do_VIEW(self):
         """
-            docstring
+        docstring
         """
-        self._create_response(501, { "error": "not implemented"})
+        self._create_response(501, {"error": "not implemented"})
 
     def do_POST(self):
         """
-            docstring
+        docstring
         """
-        self._create_response(501, { "error": "not implemented"})
+        self._create_response(501, {"error": "not implemented"})
 
     def do_PUT(self):
         """
-            docstring
+        docstring
         """
-        self._create_response(501, { "error": "not implemented"})
+        self._create_response(501, {"error": "not implemented"})
 
     def do_DELETE(self):
         """
-            docstring
+        docstring
         """
-        self._create_response(501, { "error": "not implemented"})
+        self._create_response(501, {"error": "not implemented"})
