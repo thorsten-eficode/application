@@ -2,8 +2,9 @@
     docstring
 """
 
-import sys
 import socketserver
+import sys
+
 from api.handler import ServiceHandler
 
 
