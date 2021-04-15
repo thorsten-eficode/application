@@ -22,20 +22,36 @@ class Endpoint:
 
     @uri.setter
     def uri(self, value: str) -> None:
-        """
-        todo:
-        check for valid url and raise ValueError if not
-        """
+        """ todo: check for valid data and raise ValueError if not """
         self._uri = value
 
-    def __str__(self):
-        return "[{}] {}".format(self._status, self._uri)
+    @property
+    def status(self) -> int:
+        return self._status
 
-    def __compare__(self, uri: str):
-        return self._uri == uri
+    @status.setter
+    def status(self, value: int) -> None:
+        """ todo: check for valid data and raise ValueError if not """
+        self._status = value
 
-    def __eq__(self, other):
-        return self._uri == other.uri
+    @property
+    def data(self) -> str:
+        return self._data
+
+    @data.setter
+    def data(self, value: str) -> None:
+        """ todo: check for valid data and raise ValueError if not """
+        self._data = value
+
+    def __str__(self) -> str:
+        return f"[{self.status}] {self.uri}"
+
+    def __compare__(self, uri: str) -> bool:
+        return self.uri == uri
+
+    def __eq__(self, other) -> bool:
+        """ todo: fix other datatype """
+        return self.uri == other.uri
 
 
 class Borg:  # pylint: disable=too-few-public-methods
@@ -45,7 +61,7 @@ class Borg:  # pylint: disable=too-few-public-methods
 
     _shared_state: object = {}
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.__dict__ = self._shared_state
 
 
@@ -54,7 +70,7 @@ class Endpoints(Borg):
     manages a collection of endpoints
     """
 
-    def __init__(self, eps=None):
+    def __init__(self, eps=None) -> None:
         super().__init__()
         if eps:
             self._eps = eps
@@ -65,14 +81,15 @@ class Endpoints(Borg):
                     Endpoint(uri="/health/readiness", status=200, data="ok"),
                 ]
 
-    def __contains__(self, uri: str):
+    def __contains__(self, uri: str) -> bool:
         return self.__getitem__(uri) is not None
 
     def __getitem__(self, uri: str):
+        """ todo: correct return value (Endpoint vs. None) """
         for endpoint in self._eps:
             if endpoint._uri == uri:
                 return endpoint
         return None
 
-    def __add__(self, endpoint: Endpoint):
+    def __add__(self, endpoint: Endpoint) -> None:
         self._eps.append(endpoint)

@@ -5,6 +5,7 @@
 
 import json
 from http.server import BaseHTTPRequestHandler
+
 from api.endpoints import Endpoints
 
 
@@ -18,7 +19,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
         self._eps = Endpoints()
         super().__init__(*args, **kwargs)
 
-    def _create_response(self, status: int, data: object):
+    def _create_response(self, status: int, data: object) -> None:
         """
         docstring
         """
@@ -27,7 +28,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps(data).encode("utf-8"))
 
-    def do_GET(self):
+    def do_GET(self) -> None:
         """
         docstring
         """
@@ -37,25 +38,25 @@ class ServiceHandler(BaseHTTPRequestHandler):
         else:
             self._create_response(404, {"error": "ressource not found"})
 
-    def do_VIEW(self):
+    def do_VIEW(self) -> None:
         """
         docstring
         """
         self._create_response(501, {"error": "not implemented"})
 
-    def do_POST(self):
+    def do_POST(self) -> None:
         """
         docstring
         """
         self._create_response(501, {"error": "not implemented"})
 
-    def do_PUT(self):
+    def do_PUT(self) -> None:
         """
         docstring
         """
         self._create_response(501, {"error": "not implemented"})
 
-    def do_DELETE(self):
+    def do_DELETE(self) -> None:
         """
         docstring
         """
