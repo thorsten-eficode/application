@@ -13,7 +13,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
     docstring
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         # super/init returns after request processing ends, so call it last
         self._eps = Endpoints()
         super().__init__(*args, **kwargs)

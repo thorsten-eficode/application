@@ -11,10 +11,22 @@ class Endpoint:
     _data: str
     """
 
-    def __init__(self, uri: str = "/", status: int = 200, data: str = ""):
-        self._uri: str = uri
+    def __init__(self, uri: str = "/", status: int = 200, data: str = "") -> None:
+        self.uri = uri
         self._status: int = status
         self._data: str = data
+
+    @property
+    def uri(self) -> str:
+        return self._uri
+
+    @uri.setter
+    def uri(self, value: str) -> None:
+        """
+        todo:
+        check for valid url and raise ValueError if not
+        """
+        self._uri = value
 
     def __str__(self):
         return "[{}] {}".format(self._status, self._uri)
