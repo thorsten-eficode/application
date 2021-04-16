@@ -2,6 +2,10 @@
     docstring
 """
 
+METRICS=b"""
+https://sysdig.com/blog/prometheus-metrics/#prometheusmetricsopenmetricstypes
+"""
+
 
 class Endpoint:
     """

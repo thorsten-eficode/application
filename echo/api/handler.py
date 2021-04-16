@@ -5,8 +5,7 @@
 
 from http.server import BaseHTTPRequestHandler
 
-from api.endpoints import Endpoint
-from api.endpoints import Endpoints
+from api.endpoints import Endpoint, Endpoints
 
 
 class ServiceHandler(BaseHTTPRequestHandler):
@@ -38,7 +37,7 @@ class ServiceHandler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         """ Store data in endpoints """
-        content_length: int = int(self.headers['Content-Length'])
+        content_length: int = int(self.headers["Content-Length"])
         post_data = self.rfile.read(content_length)
         self._eps += Endpoint(self.path, 200, post_data)
-        self._create_response(200, b'OK')
+        self._create_response(200, b"OK")
