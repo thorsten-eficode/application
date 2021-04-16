@@ -35,11 +35,11 @@ class Endpoint:
         self._status = value
 
     @property
-    def data(self) -> str:
+    def data(self) -> bytes:
         return self._data
 
     @data.setter
-    def data(self, value: str) -> None:
+    def data(self, value: bytes) -> None:
         """ todo: check for valid data and raise ValueError if not """
         self._data = value
 
@@ -77,8 +77,8 @@ class Endpoints(Borg):
         else:
             if not hasattr(self, "_eps"):
                 self._eps = [
-                    Endpoint(uri="/health/liveness", status=200, data="ok"),
-                    Endpoint(uri="/health/readiness", status=200, data="ok"),
+                    Endpoint(uri="/health/liveness", status=200, data=b"ok"),
+                    Endpoint(uri="/health/readiness", status=200, data=b"ok"),
                 ]
 
     def __contains__(self, uri: str) -> bool:

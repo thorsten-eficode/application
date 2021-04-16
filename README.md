@@ -11,3 +11,16 @@ This *application* is used to learn automation and security features of GitHub.
 - [Introduction to GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions)
 - [Docker integration](https://docs.docker.com/ci-cd/github-actions/)
 - [GitHub Action: SuperLinter](https://github.com/github/super-linter)
+
+## Notes
+
+Register response:
+
+```bash
+curl -d "@test/data.json" -X POST http://localhost:8080/demo/data
+```
+
+Call response:
+
+```bash
+curl http://localhost:8080/demo/data

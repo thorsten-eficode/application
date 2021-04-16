@@ -3,15 +3,17 @@
     https://www.ietf.org/assignments/http-status-codes/http-status-codes.txt
 """
 
-import json
 from http.server import BaseHTTPRequestHandler
 
+from api.endpoints import Endpoint
 from api.endpoints import Endpoints
 
 
 class ServiceHandler(BaseHTTPRequestHandler):
     """
-    docstring
+    Custom request handler
+    POST: register data with path
+    GET:  return previously registered data (see POST)
     """
 
     def __init__(self, *args, **kwargs) -> None:
@@ -19,45 +21,24 @@ class ServiceHandler(BaseHTTPRequestHandler):
         self._eps = Endpoints()
         super().__init__(*args, **kwargs)
 
-    def _create_response(self, status: int, data: object) -> None:
-        """
-        docstring
-        """
+    def _create_response(self, status: int, data: bytes) -> None:
+        """ write response """
         self.send_response(status)
         self.send_header("Content-type", "application/json")
         self.end_headers()
-        self.wfile.write(json.dumps(data).encode("utf-8"))
+        self.wfile.write(data)
 
     def do_GET(self) -> None:
-        """
-        docstring
-        """
+        """ Answer call with previously stored data (or answer with 404) """
         endpoint = self._eps[self.path]
         if endpoint is not None:
             self._create_response(endpoint._status, endpoint._data)
         else:
-            self._create_response(404, {"error": "ressource not found"})
-
-    def do_VIEW(self) -> None:
-        """
-        docstring
-        """
-        self._create_response(501, {"error": "not implemented"})
+            self._create_response(404, b'{"error": "ressource not found"}')
 
     def do_POST(self) -> None:
-        """
-        docstring
-        """
-        self._create_response(501, {"error": "not implemented"})
-
-    def do_PUT(self) -> None:
-        """
-        docstring
-        """
-        self._create_response(501, {"error": "not implemented"})
-
-    def do_DELETE(self) -> None:
-        """
-        docstring
-        """
-        self._create_response(501, {"error": "not implemented"})
+        """ Store data in endpoints """
+        content_length: int = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+        self._eps += Endpoint(self.path, 200, post_data)
+        self._create_response(200, b'OK')
