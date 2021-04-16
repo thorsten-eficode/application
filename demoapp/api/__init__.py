@@ -5,11 +5,13 @@
 import signal
 import sys
 
+
 def receive_signal(signal_number, frame):
     """ docstring """
     msg: str = "Signal: {}\nFrame: {}".format(signal_number, frame)
     print(msg)
     sys.exit()
+
 
 # register the signals to be caught
 signal.signal(signal.SIGHUP, receive_signal)

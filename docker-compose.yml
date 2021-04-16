@@ -1,0 +1,6 @@
+version: '3'
+services:
+  demoapp:
+    build: demoapp
+    ports:
+      - '8080:8080'
