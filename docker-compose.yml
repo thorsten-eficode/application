@@ -1,6 +1,6 @@
 version: '3'
 services:
-  demoapp:
-    build: demoapp
+  rest-echo:
+    build: echo
     ports:
       - '8080:8080'

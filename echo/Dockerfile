@@ -9,4 +9,4 @@ WORKDIR /app
 
 USER appuser
 
-CMD ["python", "./demoapp.py"]
+CMD ["python", "./echo.py"]

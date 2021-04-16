@@ -27,4 +27,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/$GITHUB_REPOSITORY:latest
+            ghcr.io/thorsten-eficode/application/echo:latest
