@@ -2,6 +2,15 @@
     docstring
 """
 
+from typing import Dict
+
+# https://sysdig.com/blog/prometheus-metrics/#prometheusmetricsopenmetricstypes
+METRIC=b"""
+# HELP echo_constant_metric Constant number reported for testing purposes.
+# TYPE echo_constant_metric gauge
+echo_constant_metric 42
+"""
+
 
 class Endpoint:
     """
@@ -11,10 +20,10 @@ class Endpoint:
     _data: str
     """
 
-    def __init__(self, uri: str = "/", status: int = 200, data: str = "") -> None:
+    def __init__(self, uri: str = "/", status: int = 200, data: bytes = b"") -> None:
         self.uri = uri
-        self._status: int = status
-        self._data: str = data
+        self.status: int = status
+        self.data: str = data
 
     @property
     def uri(self) -> str:
@@ -35,11 +44,11 @@ class Endpoint:
         self._status = value
 
     @property
-    def data(self) -> str:
+    def data(self) -> bytes:
         return self._data
 
     @data.setter
-    def data(self, value: str) -> None:
+    def data(self, value: bytes) -> None:
         """ todo: check for valid data and raise ValueError if not """
         self._data = value
 
@@ -59,7 +68,7 @@ class Borg:  # pylint: disable=too-few-public-methods
     docstring
     """
 
-    _shared_state: object = {}
+    _shared_state: Dict[str, object] = {}
 
     def __init__(self) -> None:
         self.__dict__ = self._shared_state
@@ -77,8 +86,9 @@ class Endpoints(Borg):
         else:
             if not hasattr(self, "_eps"):
                 self._eps = [
-                    Endpoint(uri="/health/liveness", status=200, data="ok"),
-                    Endpoint(uri="/health/readiness", status=200, data="ok"),
+                    Endpoint(uri="/health/liveness", status=200, data=b"ok"),
+                    Endpoint(uri="/health/readiness", status=200, data=b"ok"),
+                    Endpoint(uri="/health/metrics", status=200, data=METRIC),
                 ]
 
     def __contains__(self, uri: str) -> bool:
