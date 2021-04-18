@@ -25,7 +25,7 @@ serviceAccount:
 
 podAnnotations:
   prometheus.io/scrape: "true"
-  prometheus.io/path: "/health/metric"
+  prometheus.io/path: "/health/metrics"
   prometheus.io/port: "8080"
 
 podSecurityContext: {}
