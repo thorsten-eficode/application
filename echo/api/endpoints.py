@@ -5,7 +5,7 @@
 from typing import Dict
 
 # https://sysdig.com/blog/prometheus-metrics/#prometheusmetricsopenmetricstypes
-METRIC=b"""
+METRIC = b"""
 # HELP echo_constant_metric Constant number reported for testing purposes.
 # TYPE echo_constant_metric gauge
 echo_constant_metric 42
